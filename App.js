@@ -28,13 +28,15 @@ import {
 } from 'react-viro';
 
 var sharedProps = {
-  apiKey:"API_KEY",
+  apiKey:"255370FA-342A-4DA4-8286-2E08116B6073",
 }
 
 var InitialARScene = require('./js/HelloWorldSceneAR');
+var InitialPosterScene = require('./js/ARPosterDemo');
 
 var UNSET = "UNSET";
 var AR_NAVIGATOR_TYPE = "AR";
+var POSTER_NAVIGATOR_TYPE = "POSTER";
 
 // This determines which type of experience to launch in, or UNSET, if the user should
 // be presented with a choice of AR or VR. By default, we offer the user a choice.
@@ -60,6 +62,8 @@ export default class ViroSample extends Component {
       return this._getExperienceSelector();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
       return this._getARNavigator();
+    } else if (this.state.navigatorType == POSTER_NAVIGATOR_TYPE) {
+      return this._getPosterNavigator();
     }
   }
   _getExperienceSelector() {
@@ -78,7 +82,10 @@ export default class ViroSample extends Component {
         </Header>
         <Content contentContainerStyle={{flex:1,justifyContent: 'center'}} >
           <Button full warning onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}>
-            <Text>AR</Text>
+            <Text>Hello World!</Text>
+          </Button>
+          <Button full warning onPress={this._getExperienceButtonOnPress(POSTER_NAVIGATOR_TYPE)}>
+            <Text>AR Poster</Text>
           </Button>
         </Content>
       </Container>
@@ -89,6 +96,13 @@ export default class ViroSample extends Component {
       return (
         <ViroARSceneNavigator {...this.state.sharedProps}
           initialScene={{scene: InitialARScene}} />
+      );
+    }
+
+    _getPosterNavigator() {
+      return (
+        <ViroARSceneNavigator {...this.state.sharedProps}
+          initialScene={{scene: InitialPosterScene}} />
       );
     }
 
